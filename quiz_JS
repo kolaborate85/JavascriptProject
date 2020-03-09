@@ -1,0 +1,49 @@
+var questions = [
+        { question: "what are objects in Javascript? a.Variable b. Data Structure c. Expressions", options: [
+          "a","b","c"
+        	],
+         correctAnswer: "b"},
+         { question: "What are examples of Higher order functions? a. Arrow functions b. closure c. array filter function", options: [
+          "a","b","c"
+        	],
+         correctAnswer: "c"},
+				{ question: "The following is used to loop through an array. a.if statement b. boolean c. for loop", options: [
+          "a","b","c"
+        	],
+         correctAnswer: "c"},
+      ];
+    function load(items) {
+      var listElement = document.querySelector("#the-list");
+      for(var c = listElement.children.length - 1; c >= 0; c--) {
+        listElement.children[c].remove();
+      }
+
+      
+      questions.forEach((q, idx) => {
+        var newElement = document.createElement("div");
+       var html = "<p>" + q.question + "</p>";
+        for(var o = 0; o < q.options.length; o++) {
+          html += "<label><input type='radio' name='rdo" + idx + "' value='" + q.options[o] + "' />" + q.options[o] + "</label>&nbsp;";
+        }
+         newElement.innerHTML = html;
+        listElement.appendChild(newElement);
+      });
+    }
+      function score() {
+        var s = 0;
+        for(var q = 0; q < questions.length; q++) {
+          var qElements = document.getElementsByName("rdo" + q);
+          for(var qe = 0; qe < qElements.length; qe++) {
+            if(qElements[qe].checked && qElements[qe].value === questions[q].correctAnswer) {
+              s++;
+            }
+          }
+        }
+        alert("You got " + s + " question correct");
+				document.getElementById("finalResult").innerHTML = s + " question right";
+				if(s == 3){
+					alert("You can send now your resume to yournewjob@gmail.com");
+				}
+      }
+
+    load();
